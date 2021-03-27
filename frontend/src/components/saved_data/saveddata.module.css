@@ -1,0 +1,42 @@
+#stocktable{
+    margin-top: 20px;
+   
+}
+#top{
+    
+    background-color: rgb(225, 242, 243);
+    padding:18px;
+    margin-top: 10px;
+    border-left:3px solid rgb(188, 240, 253);
+    border-top:3px solid rgb(188, 240, 253);
+    border-right:3px solid rgb(188, 240, 253);
+    box-shadow: 3px 3px rgb(188, 240, 253);
+}  
+.heading{
+    
+} 
+
+#tableHead{
+    background-color: rgb(246, 251, 252);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 17px;
+    font-weight: bolder;
+    border: 1px solid rgb(197, 193, 193); 
+    padding:10px; 
+}
+
+#tableLine{
+    background-color: rgb(246, 251, 252);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    border: 1px solid rgb(197, 193, 193);
+    padding-top:10px;
+}
+#button{
+    vertical-align: middle;
+    margin-bottom: 10px;
+    background-color: red;
+}
+
+
+
+
