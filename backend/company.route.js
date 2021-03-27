@@ -3,7 +3,7 @@ const express = require('express')
 const router = express.Router()
 
 let Company=require('./company.modal');
-const { find } = require('./company.modal');
+const { find, findByIdAndDelete } = require('./company.modal');
 
 router.route('/home').post((req,res)=>{
     const name=req.body.name;
@@ -30,16 +30,12 @@ router.route('/view').get((req,res)=>{
     
     Company.find().then(result=>res.send(result))
 })
-router.route('/view').post((req,res)=>{
+.delete(async(req,res)=>{
     
-    // Company.deleteOne(req).then(result=>res.send('result'))
-    console.log(req.body)
-    res.send('request recieved')
-    const inter=Company.deleteOne(req.body);
-       
-    if(inter){
-        console.log('match is found')
-    }
-    
+
+   const element= await Company.deleteOne({name:req.body.name}).then(result=>{
+      
+    res.send(' delete request recieved')
+    return console.log(element)})
 })
 module.exports=router
