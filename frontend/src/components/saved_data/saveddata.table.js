@@ -1,26 +1,31 @@
 import react,{Component} from 'react';
 import axios from 'axios';
-import styles from './saveddata.module.css'
+import styles from './saveddata.module.css';
+import { Link } from 'react-router-dom';
 
 class SavedData extends Component{
 
     constructor(props){
         super(props)
         this.state={
-            companiesList:[],
+            savedCompaniesList:[],
         }
         
     }
      componentDidMount(){
          axios.get(`http://localhost:5000/view`)
          .then(res=>{  
-           this.setState({companiesList:res.data})
+           this.setState({savedCompaniesList:res.data})
          })
          .catch(err=>err)
      }
 
      deleteData=(element)=>{
-      axios.delete(`http://localhost:5000/view`,element)
+
+      axios.post(`http://localhost:5000/view`,element)
+      .then(res=>{return  axios.get(`http://localhost:5000/view`)})
+      .then(res=>{this.setState({savedCompaniesList:res.data})})
+      .catch(err=>err)
      }
     render(){
         return(
@@ -51,7 +56,7 @@ class SavedData extends Component{
                         </div>
                     </div>
                 </div>
-                {this.state.companiesList.map((el,index)=>{
+                {this.state.savedCompaniesList.map((el,index)=>{
                     return <div  className="container text-center" id={styles["tableLine"]}>
                     <div className="row ">
                     <div className="col-sm-4">
@@ -78,6 +83,11 @@ class SavedData extends Component{
             </div> 
 
                 })}
+            <button type="submit"  
+            className="btn btn-success"
+            id={styles["buttonReturn"]}>
+                <Link style={{color:"white"}} to='/home'>Return</Link>
+            </button>
         </div>
            
         

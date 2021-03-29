@@ -2,13 +2,28 @@ import React,{Component} from 'react';
 import styles from './posts.module.css';
 import { FaSearch } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 class Posts extends Component{
 
     constructor(props){
         super(props)
+        this.state={
+          savedCompaniesList:[]
+        }
     }
+ componentDidMount(){
+  axios.get(`http://localhost:5000/view`)
+  .then(res=>{
+    const inter =res.data;
+    let newArray=[];
+    for(const {name:n} of inter){
+      newArray.push(n);
+    }
+    this.setState({savedCompaniesList:newArray})
+  }).catch(err=>err)
 
+ }
 
     render(){
         if(this.props.loading){
@@ -49,7 +64,7 @@ class Posts extends Component{
        </div>
        {this.props.posts.map((el,index)=>{
          if(this.props.show[index]===true){
-             if(this.props.viewState[index]===true){
+             if(this.props.viewState[index]===true && !(this.state.savedCompaniesList.includes(el.name))){
                 return <div  className="container text-center" id={styles["tableLine"]}>
                 <div className="row ">
                   <div className="col-sm-4">
@@ -102,7 +117,6 @@ class Posts extends Component{
               
            } 
        })}
-       
     </div>
        )
     }
