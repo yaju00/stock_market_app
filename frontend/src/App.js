@@ -7,6 +7,7 @@ import SavedData from './components/saved_data/saveddata.table'
 import axios from 'axios';
 import  StockTable from './components/stock_table/stocktable';
 import Cards from './components/hero_cards/cards';
+import Home from './components/home/home';
 
 class App extends Component{
   constructor(props){
@@ -20,6 +21,7 @@ class App extends Component{
       <Router>
         <Navbar />
           <Cards />
+          <Home />
           <Route path='/home'><StockTable /></Route>
           <Route path='/view'><SavedData /></Route>
       </Router>
